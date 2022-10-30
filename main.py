@@ -1,3 +1,4 @@
+from typing import Optional
 from fastapi import FastAPI
 
 
@@ -9,12 +10,21 @@ app = FastAPI()
 
 # start api #
 
-@app.get('/age/{age}')
-def ageInDays(age : int):
-    
-    age_in_days = age * 365
+@app.get('/comments')
 
-    return {
-        'age' : age,
-        'ageInDays' : age_in_days
+def comments(limit : int = 10 , date : str = '2022-12-12' , order : Optional[str] = None):
+    
+    return{
+        "comments" : [
+            {
+                '1' : 'h',
+                '2' : 'e',
+                '3' : 'l',
+                '4' : 'l',
+                '5' : 'o',
+            },
+        ],
+
+        'limit' : limit,
+        'date' : date
     }

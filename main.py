@@ -6,21 +6,15 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-# ##############
 
-@app.get('/')
+# start api #
 
-def home():
+@app.get('/age/{age}')
+def ageInDays(age : int):
+    
+    age_in_days = age * 365
+
     return {
-        "message" : "Hello world"
-    }
-
-
-# about api
-
-@app.get('/about')
-
-def about():
-    return {
-        'data' : "about"
+        'age' : age,
+        'ageInDays' : age_in_days
     }

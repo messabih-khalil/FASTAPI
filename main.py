@@ -1,25 +1,25 @@
-from typing import Optional
-from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi import Depends, FastAPI
 
+from schemas import schemas
+from dbConnection import SessionLocal
 
-class Candy(BaseModel):
-    name : str
-    recipe: str
-    piece : Optional[bool] = False
+from sqlalchemy.orm import Session
 
-# init app
+import crud
 
 app = FastAPI()
 
 
-# start api #
+def db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close
 
-@app.post('/candy')
 
-def candy(request : Candy):
-    return {
-        'name' : request.name,
-        'recipe' : request.recipe,
-        'is_piece' : request.piece
-    }
+#* create user //: endpoint
+@app.post('/user' , response_model=schemas.UserBase)
+async def createUser(request : schemas.CreateUser , db : Session = Depends(db)):
+    user = await crud.create_user(db=db , user = request)
+    return user

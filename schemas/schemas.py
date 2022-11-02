@@ -1,36 +1,25 @@
 from pydantic import BaseModel
 
-from models.models import Post
-
-
-class UserBase(BaseModel):
+# * User create schema
+class CreateUserSchema(BaseModel):
+    id : int
     username : str
-    email : str
-    is_active : bool
-
-    class Config:
-        orm_mode = True
-
-
-
-class CreateUser(UserBase):
-    id : int
     password : str
-    # items : list[Post] = []
-
-
-class PostBase(BaseModel):
-    id : int
-    title : str
-    description : str
-
-    user : int
 
     class Config:
         orm_mode = True
 
-class CreatePost(PostBase):
-    pass
+# * User Schema
+class UserSchema(BaseModel):
+    id : int
+    username : str
 
-class GetPost(PostBase):
-    pass
+    class Config:
+        orm_mode = True
+
+# * Response model :=> user
+class UserResponse(BaseModel):
+    username : str
+
+    class Config:
+        orm_mode = True

@@ -1,0 +1,17 @@
+{
+  "sqltools.useNodeRuntime": true,
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "driver": "SQLite",
+      "database": "${workspaceFolder:src}/sql_app.db",
+      "name": "db"
+    },
+    {
+      "previewLimit": 50,
+      "driver": "SQLite",
+      "name": "user db",
+      "database": "${workspaceFolder:src}/data.db"
+    }
+  ]
+}

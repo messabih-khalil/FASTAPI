@@ -1,12 +1,21 @@
+from datetime import datetime
 from fastapi import FastAPI , HTTPException, Request , status
 from fastapi.responses import JSONResponse
-
+from fastapi.encoders import jsonable_encoder
+from pydantic import BaseModel
 
 # custom exception 
 class NotExistException(Exception):
     def __init__(self , name : str):
         self.name = name
 
+
+class Item(BaseModel):
+    title: str
+    timestamp: datetime
+    description: str | None = None
+
+    
 app = FastAPI()
 
 
@@ -30,3 +39,6 @@ def getName(name : str | None):
     return {
         "name" : name
     }
+
+
+# jsonable item
